@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import TodoApp from "./todoApp/page";
+import { AppBar, Toolbar, Container, Button, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 function App() {
+  const pages = [{ text: "Todos", link: "/todos" }];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <AppBar position="static">
+          <Container>
+            <Toolbar>
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                {pages.map((item, index) => (
+                  <Button
+                    component={Link}
+                    color="inherit"
+                    to={item.link}
+                    key={"page" + index}
+                  >
+                    {item.text}
+                  </Button>
+                ))}
+              </Box>
+            </Toolbar>
+          </Container>
+        </AppBar>
+        <Routes>
+          <Route path="/" element={<TodoApp />} />
+          <Route path="/todos" element={<TodoApp />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

@@ -1,0 +1,6 @@
+.todo-item-done{
+  background: lightgray;
+}
+.todo-item-done span{
+  color: gray;
+}
